@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, SafeAreaView, SafeAreaViewBase } from 'react-native';
+import { View, Text, StyleSheet, Image, SafeAreaView, KeyboardAvoidingView, Platform} from 'react-native';
 import { Colors } from '../theme/Colors';
 import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
-import logo from '../../assets/Logo-Medicina.jpeg';
+import logo from '../../assets/Logo-Medicina.png';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -16,9 +16,12 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}>
       <View style={styles.content}>
         <Image
-        Source = {logo} style = {styles.cornerLogo}/>
+        source = {logo} style = {styles.cornerLogo}/>
         <View style={styles.logoContainer}>
             <Text style={styles.title}>e-Salud</Text>
             <Text style={styles.subtitle}>Facultad de Medicina UANL</Text>
@@ -36,11 +39,13 @@ const LoginScreen = () => {
           value={password}
           onChangeText={setPassword}
         />
-
-        <CustomButton title="Iniciar Sesión" onPress={handleLogin} />
+        <CustomButton title="Iniciar Sesión" onPress={handleLogin} /> 
         
         <Text style={styles.forgotText}>¿Olvidaste tu contraseña?</Text>
       </View>
+     
+     </KeyboardAvoidingView>
+     
     </SafeAreaView>
   );
 };
@@ -51,8 +56,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
   },
   cornerLogo: {
-    width: 60,                // Tamaño pequeño
-    height: 60,
+    width: 40,                // Tamaño pequeño
+    height: 40,
     resizeMode: 'contain',    // Evita que la imagen se deforme
     position: 'absolute',     // Permite colocarlo libremente
     top: 50,                  // Distancia desde la parte superior
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 100,
+    marginBottom: 60,
   },
   title: {
     fontSize: 32,
@@ -81,6 +86,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 100,
     marginTop: 10,
+    overflow: 'hidden',
   },
   forgotText: {
     textAlign: 'center',

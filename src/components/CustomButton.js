@@ -1,4 +1,5 @@
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
 import { Colors } from '../theme/Colors';
 
 const CustomButton = ({ title, onPress }) => {
@@ -11,14 +12,23 @@ const CustomButton = ({ title, onPress }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.primary, // Morado
+    backgroundColor: Colors.primary, // Morado FACMED
     paddingVertical: 15,
     paddingHorizontal: 30,
-    borderRadius: 25, // Esto lo hace redondo
+    borderRadius: 25, 
     alignItems: 'center',
     marginVertical: 10,
-    borderWidth: 2,
-    borderColor: Colors.secondary, // Borde amarillo
+    // Propiedad para Android
+    elevation: 5, 
+
+    // Propiedades para iOS
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   text: {
     color: Colors.white,
