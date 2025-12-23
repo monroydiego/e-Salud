@@ -5,13 +5,21 @@ import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
 import logo from '../../assets/Logo-Medicina.png';
 
-const LoginScreen = () => {
+const LoginScreen = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // funcion que gestiona el gesto de click en el botón login
   const handleLogin = () => { 
-    console.log("Iniciando sesión con:", email); // imprime que correo inicio sesion  
+    try {
+      if(email.length > 0 && password.length > 0) {
+
+      onLoginSuccess(email);
+
+      };
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
